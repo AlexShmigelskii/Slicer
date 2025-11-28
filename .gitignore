@@ -6,3 +6,6 @@
 
 # Directory
 /test
+
+# STL files
+*.stl
