@@ -69,5 +69,15 @@ int main(void) {
     
     free(m.triangles);
 
+    Mesh m_read;
+    init_mesh(&m_read);
+    f = fopen("test/test1.stl", "rb");
+    read_mesh_binary(f, &m_read);
+    fclose(f);
+
+    write_stats(&m_read);
+
+    free_mesh(&m_read);
+
     return 0;
 }

@@ -30,8 +30,32 @@ typedef struct {
     unsigned int nb_triangles;
 } Mesh;
 
+typedef enum {
+    MESH_OK = 0,
+    MESH_ERROR_OPENING_FILE,
+    MESH_ERROR_NULL_POINTER,
+    MESH_ERROR_HEADER_READ,
+    MESH_ERROR_TRIANGLE_COUNT_READ,
+    MESH_ERROR_MEMORY_TRIANGLES_ALLOCATION_FAILED,
+    MESH_ERROR_TRIANGLES_READ,
+} Mesh_Error;
+
+// Initialising Mesh to be sure that structure
+// is ready for use 
+void init_mesh(Mesh *m);
+
+// Freeing up memory
+void free_mesh(Mesh *m);
+
 // Write Mesh m to a file f (open for writing "w")
 void write_mesh_ascii(FILE *f, Mesh *m);
 
 // Write Mesh m to a file f (open for writing "wb")
 void write_mesh_binary(FILE *f, Mesh *m);
+
+// Read Mesh from binary .STL file to Mesh m_out 
+// (open for reading "rb")
+Mesh_Error read_mesh_binary(FILE *f, Mesh *m_out);
+
+// Write stats of Mesh m to the console
+void write_stats(Mesh *m);
